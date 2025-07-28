@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { deployToVercel } from "../utils/vercelDeploy";
+import { deployToVercel } from "../utils/vercelDeploy"; // Import the function
 
-export default function DeployButton({ form }) {
+export default function DeployButton({ form }) { // Destructure props properly
   const [status, setStatus] = useState("idle");
   const [deployedUrl, setDeployedUrl] = useState("");
 
@@ -11,6 +11,7 @@ export default function DeployButton({ form }) {
       const res = await deployToVercel(form);
       setDeployedUrl(res?.url);
       setStatus("success");
+      navigator.clipboard.writeText(res?.url);
     } catch (err) {
       console.error(err);
       setStatus("error");
